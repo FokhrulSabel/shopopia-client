@@ -1,8 +1,14 @@
-import { createBrowserRouter } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
-export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <MainLayout/>,
-  },
-]);
+
+const AppRouter = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/*" element={<MainLayout />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default AppRouter;

@@ -12,7 +12,7 @@ const NavbarBrand = () => {
       </div>
 
       <div className="hidden sm:flex flex-col leading-none">
-        <span className="font-bold text-lg tracking-tight">StoreX</span>
+        <span className="font-bold text-lg tracking-tight">SHOPOPIA</span>
 
         <span className="text-xs text-muted-foreground">Modern Commerce</span>
       </div>

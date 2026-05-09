@@ -1,6 +1,4 @@
-
-// import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Footer from "@/components/layout/footer/Footer";
 import Navbar from "../components/layout/navbar/Navbar";
 
 const MainLayout = ({ children }) => {
@@ -11,7 +9,8 @@ const MainLayout = ({ children }) => {
 
       <main className="flex-1 container mx-auto p-4">{children}</main>
 
-      <Footer />
+      <Footer/>
+    
     </div>
   );
 };

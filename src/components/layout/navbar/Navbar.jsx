@@ -20,7 +20,7 @@ const Navbar = () => {
 
   const wishlistItems = useSelector((state) => state.wishlist?.items || []);
 
-  const isAuthenticated = false;
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   return (
     <>

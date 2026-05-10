@@ -1,6 +1,3 @@
-import { Button } from "@/components/ui/Button";
-import { LogOut, Package, User } from "lucide-react";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,12 +5,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+import { Button } from "@/components/ui/button";
+
+import { LogOut, Package, User } from "lucide-react";
+
 const NavbarProfileMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className="rounded-xl">
-          <User className="h-5 w-5" />
+          <User className="w-5 h-5" />
         </Button>
       </DropdownMenuTrigger>
 

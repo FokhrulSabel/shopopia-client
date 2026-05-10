@@ -4,17 +4,67 @@ const NavbarBrand = () => {
   return (
     <Link
       to="/"
-      className="flex items-center gap-2 shrink-0"
-      aria-label="Homepage"
+      className="
+        flex
+        min-w-0
+        items-center
+        gap-2
+        shrink-0
+      "
     >
-      <div className="flex items-center justify-center w-10 h-10 rounded-2xl bg-black text-white font-bold text-lg">
+      <div
+        className="
+          flex
+          h-9
+          w-9
+          sm:h-10
+          sm:w-10
+          items-center
+          justify-center
+          rounded-2xl
+          bg-black
+          text-sm
+          sm:text-lg
+          font-bold
+          text-white
+          shrink-0
+        "
+      >
         S
       </div>
 
-      <div className="hidden sm:flex flex-col leading-none">
-        <span className="font-bold text-lg tracking-tight">SHOPOPIA</span>
+      <div
+        className="
+          hidden
+          xs:flex
+          min-w-0
+          flex-col
+          leading-none
+        "
+      >
+        <span
+          className="
+            truncate
+            text-sm
+            sm:text-base
+            lg:text-lg
+            font-bold
+            tracking-tight
+          "
+        >
+          SHOPOPIA
+        </span>
 
-        <span className="text-xs text-muted-foreground">Modern Commerce</span>
+        <span
+          className="
+            truncate
+            text-[10px]
+            sm:text-xs
+            text-muted-foreground
+          "
+        >
+          Modern Commerce
+        </span>
       </div>
     </Link>
   );

@@ -1,55 +1,78 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import AuthCard from "./AuthCard";
+import AuthInput from "./AuthInput";
+import LoadingButton from "@/components/ui/LoadingButton";
+import { PATHS } from "@/routes/path";
+import { useLogin } from "../hooks/useLogin";
 
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { loginAPI } from "../services/authService";
-import { loginSuccess } from "../store/authSlice";
+
+
 
 const LoginForm = () => {
-  const dispatch = useDispatch();
+  const { mutateAsync, isPending } = useLogin();
 
-  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-  const [email, setEmail] = useState("");
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-  const [password, setPassword] = useState("");
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await loginAPI(email, password);
-
-    dispatch(loginSuccess(res));
-
-    navigate("/profile");
+    await mutateAsync(formData);
   };
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <input
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-        className="border p-2 w-full"
-      />
+    <AuthCard>
+      <div className="space-y-6">
+        <div className="space-y-2 text-center">
+          <h1 className="text-3xl font-bold tracking-tight">Welcome Back</h1>
 
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-        className="border p-2 w-full"
-      />
+          <p className="text-muted-foreground">
+            Login to your Shopopai account
+          </p>
+        </div>
 
-      <button
-        className="
-     bg-primary
-     text-white
-     px-4
-     py-2
-    "
-      >
-        Login
-      </button>
-    </form>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <AuthInput
+            name="email"
+            type="email"
+            placeholder="Enter your email"
+            onChange={handleChange}
+          />
+
+          <AuthInput
+            name="password"
+            type="password"
+            placeholder="Enter your password"
+            onChange={handleChange}
+          />
+
+          <LoadingButton isLoading={isPending} type="submit">
+            Login
+          </LoadingButton>
+        </form>
+
+        <p className="text-center text-sm text-muted-foreground">
+          Don’t have an account?{" "}
+          <Link
+            to={PATHS.REGISTER}
+            className="font-medium text-primary hover:underline"
+          >
+            Register
+          </Link>
+        </p>
+      </div>
+    </AuthCard>
   );
 };
 

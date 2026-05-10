@@ -1,4 +1,5 @@
-import axiosInstance from "@/app/lib/axios";
+import axiosInstance from "@/lib/axios";
+
 
 export const loginAPI = async (payload) => {
   const { data } = await axiosInstance.post("/auth/login", payload);

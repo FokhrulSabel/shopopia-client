@@ -10,4 +10,11 @@ export const store = configureStore({
     auth: authReducer,
     wishlist: wishlistReducer,
   },
+
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+
+  devTools: import.meta.env.DEV,
 });

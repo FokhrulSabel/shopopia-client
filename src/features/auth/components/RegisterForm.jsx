@@ -1,79 +1,85 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
 
-import { useNavigate } from "react-router-dom";
-import { registerAPI } from "../services/authService";
-import { loginSuccess } from "../store/authSlice";
+import LoadingButton from "@/components/ui/LoadingButton";
+import AuthCard from "./AuthCard";
+import AuthInput from "./AuthInput";
+import { PATHS } from "@/routes/path";
+import { useRegister } from "../hooks/useRegister";
 
 const RegisterForm = () => {
-  const dispatch = useDispatch();
+  const { mutateAsync, isPending } = useRegister();
 
-  const navigate = useNavigate();
-
-  const [form, setForm] = useState({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await registerAPI(form);
-
-    dispatch(loginSuccess(res));
-
-    navigate("/profile");
+    await mutateAsync(formData);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <input
-        placeholder="Name"
-        onChange={(e) =>
-          setForm({
-            ...form,
-            name: e.target.value,
-          })
-        }
-        className="border p-2 w-full"
-      />
+    <AuthCard>
+      <div className="space-y-6">
+        <div className="space-y-2 text-center">
+          <h1 className="text-3xl font-bold tracking-tight">Create Account</h1>
 
-      <input
-        placeholder="Email"
-        onChange={(e) =>
-          setForm({
-            ...form,
-            email: e.target.value,
-          })
-        }
-        className="border p-2 w-full"
-      />
+          <p className="text-muted-foreground">
+            Start your premium commerce experience
+          </p>
+        </div>
 
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) =>
-          setForm({
-            ...form,
-            password: e.target.value,
-          })
-        }
-        className="border p-2 w-full"
-      />
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <AuthInput
+            name="name"
+            placeholder="Full name"
+            onChange={handleChange}
+          />
 
-      <button
-        className="
-     bg-primary
-     text-white
-     px-4
-     py-2
-    "
-      >
-        Register
-      </button>
-    </form>
+          <AuthInput
+            name="email"
+            type="email"
+            placeholder="Email address"
+            onChange={handleChange}
+          />
+
+          <AuthInput
+            name="password"
+            type="password"
+            placeholder="Password"
+            onChange={handleChange}
+          />
+
+          <LoadingButton isLoading={isPending} type="submit">
+            Create Account
+          </LoadingButton>
+        </form>
+
+        <p className="text-center text-sm text-muted-foreground">
+          Already have an account?{" "}
+          <Link
+            to={PATHS.LOGIN}
+            className="font-medium text-primary hover:underline"
+          >
+            Login
+          </Link>
+        </p>
+      </div>
+    </AuthCard>
   );
 };
 

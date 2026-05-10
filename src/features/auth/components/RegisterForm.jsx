@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-
 import LoadingButton from "@/components/ui/LoadingButton";
 import AuthCard from "./AuthCard";
 import AuthInput from "./AuthInput";
 import { PATHS } from "@/routes/path";
 import { useRegister } from "../hooks/useRegister";
+import GoogleAuthButton from "./GoogleAuthButton";
+
 
 const RegisterForm = () => {
   const { mutateAsync, isPending } = useRegister();
@@ -41,6 +42,20 @@ const RegisterForm = () => {
           <p className="text-muted-foreground">
             Start your premium commerce experience
           </p>
+        </div>
+
+        <GoogleAuthButton />
+
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t border-border/40" />
+          </div>
+
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-3 text-muted-foreground">
+              Or continue with email
+            </span>
+          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">

@@ -5,8 +5,7 @@ import AuthInput from "./AuthInput";
 import LoadingButton from "@/components/ui/LoadingButton";
 import { PATHS } from "@/routes/path";
 import { useLogin } from "../hooks/useLogin";
-
-
+import GoogleAuthButton from "./GoogleAuthButton";
 
 
 const LoginForm = () => {
@@ -40,6 +39,20 @@ const LoginForm = () => {
           <p className="text-muted-foreground">
             Login to your Shopopai account
           </p>
+        </div>
+
+        <GoogleAuthButton />
+
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t border-border/40" />
+          </div>
+
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-3 text-muted-foreground">
+              Or continue with email
+            </span>
+          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">

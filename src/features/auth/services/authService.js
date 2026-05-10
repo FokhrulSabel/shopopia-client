@@ -1,30 +1,19 @@
-export const loginAPI = async (email, password) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        user: {
-          id: 1,
-          name: "John Doe",
-          email,
-        },
+import axiosInstance from "@/app/lib/axios";
 
-        token: "fake-jwt-token",
-      });
-    }, 1000);
-  });
+export const loginAPI = async (payload) => {
+  const { data } = await axiosInstance.post("/auth/login", payload);
+
+  return data;
 };
 
-export const registerAPI = async (data) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        user: {
-          id: Date.now(),
-          ...data,
-        },
+export const registerAPI = async (payload) => {
+  const { data } = await axiosInstance.post("/auth/register", payload);
 
-        token: "fake-jwt-token",
-      });
-    }, 1000);
-  });
+  return data;
+};
+
+export const getProfileAPI = async () => {
+  const { data } = await axiosInstance.get("/auth/profile");
+
+  return data;
 };

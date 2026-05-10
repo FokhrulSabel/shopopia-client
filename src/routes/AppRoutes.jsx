@@ -5,10 +5,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "@/layouts/MainLayout";
 
 import ProtectedRoute from "./ProtectedRoute";
+import { PATHS } from "./path";
 
 const LoginPage = lazy(() => import("@/features/auth/pages/LoginPage"));
 
 const RegisterPage = lazy(() => import("@/features/auth/pages/RegisterPage"));
+
+const ForgotPasswordPage = lazy(
+  () => import("@/features/auth/pages/ForgotPasswordPage"),
+);
 
 const ProfilePage = lazy(() => import("@/features/auth/pages/ProfilePage"));
 
@@ -28,6 +33,10 @@ const AppRoutes = () => {
           <Route path="/login" element={<LoginPage />} />
 
           <Route path="/register" element={<RegisterPage />} />
+          <Route
+            path={PATHS.FORGOT_PASSWORD}
+            element={<ForgotPasswordPage />}
+          />
 
           <Route
             path="/profile"

@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import AuthCard from "./AuthCard";
 import AuthInput from "./AuthInput";
-import LoadingButton from "@/components/ui/LoadingButton";
+
 import { PATHS } from "@/routes/path";
 import { useLogin } from "../hooks/useLogin";
 import GoogleAuthButton from "./GoogleAuthButton";
-
+import LoadingButton from "./LoadingButton";
 
 const LoginForm = () => {
   const { mutateAsync, isPending } = useLogin();
@@ -69,6 +69,20 @@ const LoginForm = () => {
             placeholder="Enter your password"
             onChange={handleChange}
           />
+
+          <div className="flex justify-end">
+            <Link
+              to={PATHS.FORGOT_PASSWORD}
+              className="
+      text-sm
+      text-muted-foreground
+      transition-colors
+      hover:text-primary
+    "
+            >
+              Forgot password?
+            </Link>
+          </div>
 
           <LoadingButton isLoading={isPending} type="submit">
             Login

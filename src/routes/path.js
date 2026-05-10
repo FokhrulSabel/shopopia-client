@@ -5,6 +5,7 @@ export const PATHS = {
   DEALS: "/deals",
   LOGIN: "/login",
   REGISTER: "/register",
+  FORGOT_PASSWORD: "/forgot-password",
   PROFILE: "/profile",
   ORDERS: "/orders",
   WISHLIST: "/wishlist",

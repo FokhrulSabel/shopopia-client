@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import LoadingButton from "@/components/ui/LoadingButton";
+
 import AuthCard from "./AuthCard";
 import AuthInput from "./AuthInput";
 import { PATHS } from "@/routes/path";
 import { useRegister } from "../hooks/useRegister";
 import GoogleAuthButton from "./GoogleAuthButton";
+import LoadingButton from "./LoadingButton";
 
 
 const RegisterForm = () => {

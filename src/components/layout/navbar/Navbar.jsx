@@ -6,12 +6,13 @@ import { useSelector } from "react-redux";
 import NavbarBrand from "./NavbarBrand";
 import NavbarActions from "./NavbarActions";
 import NavbarMobileMenu from "./NavbarMobileMenu";
-import NavbarProfileMenu from "./NavbarProfileMenu";
+// import NavbarProfileMenu from "./NavbarProfileMenu";
 
 import { navLinks } from "./navLinks";
 
-import { Button } from "@/components/ui/button";
-import { PATHS } from "@/routes/path";
+// import { Button } from "@/components/ui/button";
+// import { PATHS } from "@/routes/path";
+import NavbarAuthSection from "./NavbarAuthSection";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -20,7 +21,7 @@ const Navbar = () => {
 
   const wishlistItems = useSelector((state) => state.wishlist?.items || []);
 
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  // const { isAuthenticated } = useSelector((state) => state.auth);
 
   return (
     <>
@@ -100,7 +101,8 @@ const Navbar = () => {
               />
 
               {/* Auth */}
-              {isAuthenticated ? (
+              <NavbarAuthSection />
+              {/* {isAuthenticated ? (
                 <NavbarProfileMenu />
               ) : (
                 <div className="hidden md:flex items-center gap-2">
@@ -127,7 +129,7 @@ const Navbar = () => {
                     </Button>
                   </NavLink>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>

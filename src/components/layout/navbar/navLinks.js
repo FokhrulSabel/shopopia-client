@@ -1,22 +1,21 @@
+import { PATHS } from "@/routes/path";
+
+
 export const navLinks = [
   {
     label: "Home",
-    href: "/",
+    href: PATHS.HOME,
   },
   {
     label: "Shop",
-    href: "/shop",
+    href: PATHS.SHOP,
   },
   {
     label: "Categories",
-    href: "/categories",
+    href: PATHS.CATEGORIES,
   },
   {
     label: "Deals",
-    href: "/deals",
-  },
-  {
-    label: "New Arrivals",
-    href: "/new-arrivals",
+    href: PATHS.DEALS,
   },
 ];

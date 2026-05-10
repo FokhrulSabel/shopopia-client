@@ -1,31 +1,19 @@
-import { memo } from "react";
-import { NavLink } from "react-router-dom";
+import NavbarActions from "./NavbarActions";
+import NavbarAuthButtons from "./NavbarAuthButtons";
+import NavbarNavLinks from "./NavbarNavLinks";
+import NavbarProfileMenu from "./NavbarProfileMenu";
 
-import { navLinks } from "./navLinks";
 
-const NavbarDesktopMenu = memo(() => {
+const NavbarDesktop = ({ cartCount, wishlistCount, isAuthenticated }) => {
   return (
-    <nav
-      className="hidden lg:flex items-center gap-8"
-      aria-label="Primary navigation"
-    >
-      {navLinks.map((item) => (
-        <NavLink
-          key={item.href}
-          to={item.href}
-          className={({ isActive }) =>
-            `
-            relative text-sm font-medium transition-colors duration-300
-            hover:text-black
-            ${isActive ? "text-black" : "text-muted-foreground"}
-          `
-          }
-        >
-          {item.label}
-        </NavLink>
-      ))}
-    </nav>
-  );
-});
+    <div className="hidden lg:flex items-center gap-4">
+      <NavbarNavLinks />
 
-export default NavbarDesktopMenu;
+      <NavbarActions cartCount={cartCount} wishlistCount={wishlistCount} />
+
+      {isAuthenticated ? <NavbarProfileMenu /> : <NavbarAuthButtons />}
+    </div>
+  );
+};
+
+export default NavbarDesktop;

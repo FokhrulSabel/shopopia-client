@@ -12,7 +12,7 @@ export const navLinks = [
   },
   {
     label: "Products",
-    href: PATHS.PRODUCTS,
+    href: PATHS.PRODUCT,
   },
   {
     label: "Categories",

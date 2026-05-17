@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 
-const NavbarBrand = () => {
+const NavbarBrand = memo(() => {
   return (
     <Link
       to="/"
@@ -10,7 +11,10 @@ const NavbarBrand = () => {
         items-center
         gap-2
         shrink-0
+        transition-opacity
+        hover:opacity-80
       "
+      aria-label="Shopopia home"
     >
       <div
         className="
@@ -68,6 +72,8 @@ const NavbarBrand = () => {
       </div>
     </Link>
   );
-};
+});
+
+NavbarBrand.displayName = "NavbarBrand";
 
 export default NavbarBrand;

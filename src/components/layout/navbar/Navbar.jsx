@@ -1,27 +1,55 @@
-import { useState } from "react";
+import { useState, memo, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import NavbarBrand from "./NavbarBrand";
 import NavbarActions from "./NavbarActions";
 import NavbarMobileMenu from "./NavbarMobileMenu";
-// import NavbarProfileMenu from "./NavbarProfileMenu";
+import NavbarAuthSection from "./NavbarAuthSection";
 
 import { navLinks } from "./navLinks";
+import { useNavbarData } from "./useNavbarData";
 
-// import { Button } from "@/components/ui/button";
-// import { PATHS } from "@/routes/path";
-import NavbarAuthSection from "./NavbarAuthSection";
+const NavLink_Memo = memo(({ item }) => (
+  <NavLink
+    key={item.href}
+    to={item.href}
+    className={({ isActive }) =>
+      `
+        whitespace-nowrap
+        text-sm
+        font-medium
+        transition-colors
+        duration-200
+        ${
+          isActive
+            ? "text-foreground font-semibold"
+            : "text-muted-foreground hover:text-foreground"
+        }
+      `
+    }
+  >
+    {item.label}
+  </NavLink>
+));
+
+NavLink_Memo.displayName = "NavLink_Memo";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  const cartItems = useSelector((state) => state.cart?.items || []);
-
-  const wishlistItems = useSelector((state) => state.wishlist?.items || []);
+  const { cartCount, wishlistCount } = useNavbarData();
 
   // const { isAuthenticated } = useSelector((state) => state.auth);
+
+  const handleMobileMenuOpen = useCallback(() => {
+    setMobileOpen(true);
+  }, []);
+
+  const navLinksRender = useMemo(
+    () =>
+      navLinks.map((item) => <NavLink_Memo key={item.href} item={item} />),
+    [],
+  );
 
   return (
     <>
@@ -38,6 +66,8 @@ const Navbar = () => {
           bg-background/80
           backdrop-blur-xl
         "
+        role="navigation"
+        aria-label="Main navigation"
       >
         <div
           className="
@@ -67,37 +97,21 @@ const Navbar = () => {
               <NavbarBrand />
 
               {/* Desktop Nav */}
-              <nav className="hidden xl:flex items-center gap-8">
-                {navLinks.map((item) => (
-                  <NavLink
-                    key={item.href}
-                    to={item.href}
-                    className={({ isActive }) =>
-                      `
-                        whitespace-nowrap
-                        text-sm
-                        font-medium
-                        transition-colors
-                        ${
-                          isActive
-                            ? "text-foreground"
-                            : "text-muted-foreground hover:text-foreground"
-                        }
-                      `
-                    }
-                  >
-                    {item.label}
-                  </NavLink>
-                ))}
+              <nav
+                className="hidden xl:flex items-center gap-8"
+                role="menubar"
+                aria-label="Main menu"
+              >
+                {navLinksRender}
               </nav>
             </div>
 
             {/* RIGHT */}
             <div className="flex items-center gap-1 sm:gap-2">
               <NavbarActions
-                cartCount={cartItems.length}
-                wishlistCount={wishlistItems.length}
-                onMobileMenuOpen={() => setMobileOpen(true)}
+                cartCount={cartCount}
+                wishlistCount={wishlistCount}
+                onMobileMenuOpen={handleMobileMenuOpen}
               />
 
               {/* Auth */}

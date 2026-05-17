@@ -6,6 +6,7 @@ import MainLayout from "@/layouts/MainLayout";
 
 import ProtectedRoute from "./ProtectedRoute";
 import { PATHS } from "./path";
+import ProductDetailsPage from "@/features/products/pages/ProductDetailsPage";
 
 const LoginPage = lazy(() => import("@/features/auth/pages/LoginPage"));
 
@@ -46,6 +47,7 @@ const AppRoutes = () => {
               </ProtectedRoute>
             }
           />
+          <Route path="/products/:id" element={<ProductDetailsPage />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

@@ -1,3 +1,4 @@
+import WishlistButton from "@/features/wishlist/components/WishlistButton";
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
@@ -48,6 +49,7 @@ const ProductCard = ({ product }) => {
       >
         View Details
       </Link>
+      <WishlistButton product={product} />
     </div>
   );
 };

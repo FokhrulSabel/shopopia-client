@@ -1,8 +1,34 @@
+import { useSelector } from "react-redux";
+import WishlistItem from "../components/WishlistItem";
+
 const WishlistPage = () => {
+  const { items } = useSelector((state) => state.wishlist);
+
   return (
-    <div className="space-y-4">
-      <h1 className="text-3xl font-bold">Wishlist</h1>
-      <p className="text-muted-foreground">Coming soon...</p>
+    <div>
+      <h2
+        className="
+     text-xl
+     font-bold
+     mb-4
+    "
+      >
+        My Wishlist
+      </h2>
+
+      {items.length === 0 ? (
+        <p>Wishlist is empty</p>
+      ) : (
+        <div
+          className="
+      space-y-3
+     "
+        >
+          {items.map((item) => (
+            <WishlistItem key={item.id} item={item} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
